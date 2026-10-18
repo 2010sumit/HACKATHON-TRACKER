@@ -15,6 +15,11 @@ const percentage = document.querySelector("#percentage");
 const progressBar = document.querySelector("#progress-bar");
 const progressText = document.querySelector("#progress-text");
 const resetButton = document.querySelector("#reset-button");
+const loadTaskButton = document.querySelector("#load-task-button");
+const apiResult = document.querySelector("#api-result");
+const addApiTaskButton = document.querySelector("#add-api-task-button");
+
+let apiTaskTitle = "";
 
 function renderTasks() {
   taskList.innerHTML = "";
@@ -73,3 +78,47 @@ resetButton.addEventListener("click", () => {
 });
 
 renderTasks();
+
+loadTaskButton.addEventListener("click", async () => {
+  apiResult.textContent = "Loading...";
+  addApiTaskButton.hidden = true;
+  apiTaskTitle = "";
+  loadTaskButton.disabled = true;
+
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
+
+    if (!response.ok) {
+      throw new Error("Request failed");
+    }
+
+    const data = await response.json();
+    apiTaskTitle = data.title;
+
+    apiResult.textContent = apiTaskTitle;
+    addApiTaskButton.hidden = false;
+  } catch (error) {
+    apiResult.textContent = "Could not load task. Please try again.";
+  } finally {
+    loadTaskButton.disabled = false;
+  }
+});
+
+addApiTaskButton.addEventListener("click", () => {
+  if (!apiTaskTitle) return;
+
+  tasks.push({
+    id: nextId++,
+    title: apiTaskTitle,
+    completed: false
+  });
+
+  apiTaskTitle = "";
+  apiResult.textContent = "Task added to tracker!";
+  addApiTaskButton.hidden = true;
+
+  renderTasks();
+});
+

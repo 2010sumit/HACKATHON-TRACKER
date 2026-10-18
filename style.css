@@ -1,0 +1,153 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 40px 16px;
+  font-family: Arial, sans-serif;
+  background: #f2f5fa;
+  color: #172b4d;
+}
+
+.app {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px #172b4d12;
+}
+
+.eyebrow {
+  color: #167d70;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: clamp(28px, 6vw, 40px);
+}
+
+.subtitle, #progress-text, .footer {
+  color: #66758a;
+}
+
+.progress-card {
+  margin: 26px 0;
+  padding: 20px;
+  background: #edf7f5;
+  border-radius: 14px;
+}
+
+.progress-heading, .section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#percentage {
+  color: #167d70;
+  font-size: 26px;
+}
+
+.progress-track {
+  height: 9px;
+  margin-top: 14px;
+  overflow: hidden;
+  background: #d5e7e3;
+  border-radius: 20px;
+}
+
+#progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #168574;
+  border-radius: 20px;
+  transition: width 0.25s ease;
+}
+
+#task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #d7deea;
+  border-radius: 9px;
+  font-size: 15px;
+}
+
+button {
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: #176e65;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.88;
+}
+
+.reset-button {
+  background: #fcebea;
+  color: #a33a36;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #edf0f5;
+  overflow-wrap: anywhere;
+}
+
+li input {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  accent-color: #168574;
+}
+
+li.completed span {
+  color: #8994a5;
+  text-decoration: line-through;
+}
+
+.footer {
+  margin-top: 28px;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 21px;
+  }
+
+  #task-form {
+    flex-direction: column;
+  }
+
+  #task-form button {
+    width: 100%;
+  }
+}
