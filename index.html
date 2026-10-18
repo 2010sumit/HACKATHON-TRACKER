@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackathon Readiness Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <p class="eyebrow">YOUR HACKATHON JOURNEY</p>
+    <h1>Readiness Tracker</h1>
+    <p class="subtitle">Small steps. A stronger hackathon build.</p>
+
+    <section class="progress-card">
+      <div class="progress-heading">
+        <span>Your progress</span>
+        <strong id="percentage">0%</strong>
+      </div>
+      <div class="progress-track">
+        <div id="progress-bar"></div>
+      </div>
+      <p id="progress-text">0 of 3 tasks completed</p>
+    </section>
+
+    <form id="task-form">
+      <input id="task-input" type="text"
+        placeholder="Add a preparation task..." maxlength="100"
+        required>
+      <button type="submit">Add task</button>
+    </form>
+
+    <section>
+      <div class="section-heading">
+        <h2>Your tasks</h2>
+        <button id="reset-button" class="reset-button" type="button">
+          Reset
+        </button>
+      </div>
+      <ul id="task-list"></ul>
+    </section>
+
+    <p class="footer">One task at a time. Keep moving forward.</p>
+  </main>
+</body>
+</html>
