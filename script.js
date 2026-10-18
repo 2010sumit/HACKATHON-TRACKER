@@ -87,13 +87,15 @@ loadTaskButton.addEventListener("click", async () => {
 
   try {
     const response = await fetch(
-  "https://jsonplaceholder.typicode.com/todos/1");
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
 
     if (!response.ok) {
       throw new Error("Request failed");
     }
 
     const data = await response.json();
+    
     apiTaskTitle = data.title;
 
     apiResult.textContent = apiTaskTitle;
@@ -120,4 +122,3 @@ addApiTaskButton.addEventListener("click", () => {
 
   renderTasks();
 });
-
