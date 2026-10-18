@@ -59,7 +59,27 @@ taskForm.addEventListener("submit", event => {
   event.preventDefault();
 
   const title = taskInput.value.trim();
-  if (!title) return;
+
+  if (!title) {
+    taskInput.focus();
+    return;
+  }
+
+  if (title.length > 100) {
+    alert("Task must be 100 characters or fewer.");
+    taskInput.focus();
+    return;
+  }
+
+  const duplicateExists = tasks.some(
+    task => task.title.toLowerCase() === title.toLowerCase()
+  );
+
+  if (duplicateExists) {
+    alert("This task already exists.");
+    taskInput.focus();
+    return;
+  }
 
   tasks.push({
     id: nextId++,
@@ -109,6 +129,17 @@ loadTaskButton.addEventListener("click", async () => {
 
 addApiTaskButton.addEventListener("click", () => {
   if (!apiTaskTitle) return;
+
+  const duplicateExists = tasks.some(
+    task => task.title.toLowerCase() === apiTaskTitle.trim().toLowerCase()
+  );
+
+  if (duplicateExists) {
+    apiResult.textContent = "This task already exists.";
+    addApiTaskButton.hidden = true;
+    apiTaskTitle = "";
+    return;
+  }
 
   tasks.push({
     id: nextId++,
