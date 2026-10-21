@@ -1,4 +1,3 @@
-
 const initialTasks = [
   { id: 1, title: "Learn JavaScript basics", completed: false },
   { id: 2, title: "Understand APIs", completed: false },
@@ -24,6 +23,12 @@ let apiTaskTitle = "";
 function renderTasks() {
   taskList.innerHTML = "";
 
+  if (tasks.length === 0) {
+    const emptyMessage = document.createElement("li");
+    emptyMessage.textContent = "No tasks yet. Add a task to get started!";
+    taskList.appendChild(emptyMessage);
+  }
+
   tasks.forEach(task => {
     const li = document.createElement("li");
     if (task.completed) li.classList.add("completed");
@@ -41,10 +46,19 @@ function renderTasks() {
     const title = document.createElement("span");
     title.textContent = task.title;
 
-    li.append(checkbox, title);
+    const removeButton = document.createElement("button");
+    removeButton.type = "button";
+    removeButton.className = "remove-task-button";
+    removeButton.textContent = "Remove";
+    removeButton.setAttribute("aria-label", `Remove ${task.title}`);
+    removeButton.addEventListener("click", () => {
+      tasks = tasks.filter(existingTask => existingTask.id !== task.id);
+      renderTasks();
+    });
+
+    li.append(checkbox, title, removeButton);
     taskList.appendChild(li);
   });
-  //const completed = tasks.filter(task => task.complete).length;
 
   const completed = tasks.filter(task => task.completed).length;
   const total = tasks.length;
@@ -115,7 +129,6 @@ loadTaskButton.addEventListener("click", async () => {
     }
 
     const data = await response.json();
-    
     apiTaskTitle = data.title;
 
     apiResult.textContent = apiTaskTitle;
